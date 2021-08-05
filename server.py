@@ -1,10 +1,13 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, url_for
 import os
 import json
 import argparse
 import jinja2
 
-app = Flask(__name__)
+# Flask configuration
+public_folder_path = "/ReportDashboard/public/"
+public_folder_name = "public"
+app = Flask(__name__, static_url_path=public_folder_path, static_folder=public_folder_name)
 
 
 ########################################
@@ -18,7 +21,7 @@ def root():
     :return: N/A
     """
     # set template directory of the Flask App to the  path set by the user as command line arg.
-    return '<html><head><title>Root</title><head><body><hr/> Welcome to the main page <hr/></body></html>'
+    return f'<html><head><title>Root</title><head><body><hr/> Welcome to the main page <hr/> Building image from static public location: <br/> <img src=\'{url_for("static", filename="images/logo.svg")}\' /> </body></html>'
 
 
 @app.route('/data')
