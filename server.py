@@ -20,6 +20,7 @@ def root():
     # set template directory of the Flask App to the  path set by the user as command line arg.
     return '<html><head><title>Root</title><head><body><hr/> Welcome to the main page <hr/></body></html>'
 
+
 @app.route('/data')
 def data():
     data = {
@@ -53,7 +54,12 @@ def data():
             }
         ]
     }
-    #return jsonify(data)
+    return jsonify(data)
+
+
+@app.route('/error')
+def get_error():
+    # It will throw an error
     return json.stringify(data)
 
 
