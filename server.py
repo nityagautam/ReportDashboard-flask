@@ -3,7 +3,7 @@ import os
 import json
 import argparse
 import jinja2
-
+import sample_data
 # Flask configuration
 public_folder_path = "/ReportDashboard/public/"
 public_folder_name = "public"
@@ -14,18 +14,41 @@ app = Flask(__name__, static_url_path=public_folder_path, static_folder=public_f
 # App Gateway
 ########################################
 @app.route('/')
+def home():
+    # sample_data.data = [
+    #         {
+    #             "key": "Well, I came from flask server",
+    #             "project_name": "Project Alpha-1",
+    #             "build_no": "build15",
+    #             "build_url": "https://jenkins.url/prj/build15",
+    #             "report_date": "1 Aug 2021",
+    #             "crawled_date": "10 Aug 2021",
+    #             "report_location": "https://some.path/prj/build15/index.html",
+    #             "test_result": {
+    #                 "labels": ["Pass", "Fail", "Error", "Skipped", "Ignored"],
+    #                 "values": [10, 9, 8, 7, 6]
+    #             }
+    #         }
+    # ]
+    #
+    return render_template("index.html", data=sample_data.data)
+
+
+@app.route('/root')
 def root():
     """
-    Queries the snapshot data for both Serenity and JMter projects from the MongoDB.
+    Queries the snapshot data for both Serenity and JMeter projects from the MongoDB.
     Renders the Snapshot view of html
     :return: N/A
     """
     # set template directory of the Flask App to the  path set by the user as command line arg.
-    return f'<html><head><title>Root</title><head><body><hr/> Welcome to the main page <hr/> Building image from static public location: <br/> <img src=\'{url_for("static", filename="images/logo.svg")}\' /> </body></html>'
+    return f'<html><head><title>Root</title><head><body><hr/> Welcome to the main page <hr/> ' \
+           f'Building image from static public location: <br/> ' \
+           f'<img src=\'{url_for("static", filename="images/logo.svg")}\' /> </body></html>'
 
 
 @app.route('/data')
-def data():
+def get_data():
     data = {
         "reports": [
             {
@@ -63,23 +86,27 @@ def data():
 @app.route('/error')
 def get_error():
     # It will throw an error
-    return json.stringify(data)
+    d = {1: True, 2: False}
+    json.dumps(d)
+    return json.stringify(d)
 
 
 # 404 Handler; We can also pass the specific request errors codes to the decorator;
 @app.errorhandler(404)
 # inbuilt function which takes error as parameter
-def not_found(e):
-    return "<html><head><title>404</title><head><body><hr/> Oopse, page you are looking is not available right now. <hr/></body></html>", 404
+def not_found(err):
+    return "<html><head><title>404</title><head><body><hr/> Oops, page you are looking is not available right now. " \
+           f"<hr/> Error: {err} </body></html>", 404
 
 
 # Exception/Error handler; We can also pass the specific errors to the decorator;
 @app.errorhandler(Exception)
 def server_error(err):
     app.logger.exception(err)
-    return f"<html><head><title>500</title><head><body><hr/> Oopse, Following error occured: <br/> {err} <hr/></body></html>", 500
+    return f"<html><head><title>500</title><head><body><hr/> Oops, Following error occurred: <br/> {err} " \
+           f"<hr/></body></html>", 500
 
 
 # Executor
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port='5000', threaded=True)  # Running the app in debug mode
+    app.run(debug=True, host='0.0.0.0', port=10000, threaded=True)  # Running the app in debug mode

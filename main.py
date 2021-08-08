@@ -13,8 +13,11 @@ Usage:
 # ===============================================
 # Other stubs
 # ===============================================
-def main():
-    pass
+def problem1():
+    # problem statement
+    result = []
+    # Solution goes here
+    print(sorted(result))
 
 
 # ===============================================
@@ -25,5 +28,5 @@ if __name__ == "__main__":
     config = {}
 
     # Call the main now with configs
-    main()
+    problem1()
 
