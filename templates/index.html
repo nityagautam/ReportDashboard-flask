@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+        <link rel="icon" href="{{url_for('static', filename='images/logo.svg')}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#000000">
+        <meta name="description" content="Web site created using create-react-app">
+        <link rel="apple-touch-icon" href="http://localhost:3000/logo192.png">
+        <!--
+          manifest.json provides metadata used when your web app is installed on a
+          user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+        -->
+        <link rel="manifest" href="http://localhost:3000/manifest.json">
+        <!--
+          Notice the use of  in the tags above.
+          It will be replaced with the URL of the `public` folder during the build.
+          Only files inside the `public` folder can be referenced from the HTML.
+
+          Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+          work correctly both with client-side routing and a non-root public URL.
+          Learn how to configure a non-root public URL by running `npm run build`.
+        -->
+
+        <title>Dashboard App</title>
+
+        <!-- Put the style here -->
+        <style>
+            body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  text-align: center;
+}
+
+.move-in-circle {
+  /* height: 05vmin; */
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .move-in-circle {
+    animation: App-logo-spin infinite 5s linear;
+  }
+}
+
+.App-logo {
+  height: 05vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  display: flex;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  /* Fixing the top header position */
+  position: fixed;
+  width: 100%;
+  margin-top: -80px;
+  box-shadow: 2px 1px 10px rgb(0 0 0 / 70%);
+}
+
+.app-menu {
+  width: "70%";
+  font-size: calc(10px + 1vmin);
+}
+
+.app-header-bar {
+  padding: 3vh;
+  display:flex;
+  flex-direction:row;
+  width: 100%;
+}
+.app-title {
+  font-size: larger;
+  word-break: keep-all;
+  width: 30%;
+  display:flex;
+  flex-direction:row;
+  white-space: nowrap;
+}
+
+.app-version {
+  font-size: xx-small;
+}
+
+.body-container {
+    margin-top: 80px;
+}
+
+.info-bar {
+  background-color: black;
+  color: yellow;
+}
+
+.control-bar {
+  background-color: #3c4452;
+  color: white;
+  padding: 1vh;
+  display:flex;
+  flex-direction:row;
+}
+
+.app-data-area {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 100%;
+}
+
+.card {
+    /*padding: 10px;*/
+    margin: 10px;
+    background-color: white;
+    color: black;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    box-shadow: -5px 1px 5px rgba(0,0,0, 0.6);
+    /*width: 450px;*/
+}
+.card-title {
+    font-weight: normal;
+    text-align: left;
+    background-color: lightgray;
+}
+.card-info {
+    text-align: left;
+}
+.card-body {}
+.card-action {
+    padding: 10px;
+    text-align: right;
+}
+
+.card-info, .card-body, .card-title {
+    padding: 5px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.paragraph {
+    /*padding: 3px;*/
+    margin: 1px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.app-footer {
+  margin-top: 20vh;
+  color: black;
+}
+
+.footer-separator {
+  background-color: cadetblue;
+  color: cadetblue;
+  size: 20px;
+  width: 80%;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+td {
+  padding: 5px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: white;
+  text-decoration: none;
+  border-bottom-style: solid;
+  border-bottom-width: 5px;
+  border-bottom-color: white;
+}
+
+/*
+=============================
+Custom Marquee Styling starts
+=============================
+*/
+.marquee {
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.marquee span {
+  display: inline-block;
+  width: max-content;
+
+  padding-left: 100%;
+  /* show the marquee just outside the paragraph */
+  will-change: transform;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee span:hover {
+  animation-play-state: paused
+}
+
+@keyframes marquee {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
+}
+
+/* Respect user preferences about animations */
+@media (prefers-reduced-motion: reduce) {
+  .marquee span {
+    animation-iteration-count: 1;
+    animation-duration: 0.01;
+    /* instead of animation: none, so an animationend event is
+     * still available, if previously attached.
+     */
+    width: auto;
+    padding-left: 0;
+  }
+}
+/*
+=============================
+Custom Marquee styling ends
+=============================
+*/
+
+        </style>
+<!--        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}" />-->
+        <script charset="utf-8" src="./Dashboard App_files/main.5cfd43a92457bbd8a5d8.hot-update.js"></script>
+        <script charset="utf-8" src="./Dashboard App_files/main.1339f7fe271289d3b346.hot-update.js"></script>
+        <script charset="utf-8" src="./Dashboard App_files/main.97317f1c5d3343651699.hot-update.js"></script>
+        <script charset="utf-8" src="./Dashboard App_files/main.e13fc51c220f993b6ff0.hot-update.js"></script>
+        <script charset="utf-8" src="./Dashboard App_files/main.729f35be68b288562353.hot-update.js"></script>
+
+    </head>
+  <body data-new-gr-c-s-check-loaded="14.1024.0" data-gr-ext-installed="">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+        <div class="App">
+            <header class="App-header">
+                <div class="app-header-bar">
+                    <img class="App-logo move-in-circle" src="{{url_for('static', filename='images/logo.svg')}}" alt="logo">
+                    <div class="app-title">
+                        <div> AUTOMATION DASHBOARD </div>
+                        <div class="app-version"> (v1.0.0) </div>
+                    </div>
+
+                    <div style="width: 70%;">
+                        <table class="app-menu" border="0" width="100%">
+                            <tbody>
+                            <tr>
+                                <td width=""> &nbsp; </td>
+                                <td width="10%"> <a href="http://localhost:3000/index.html"> ROOT / </a> </td>
+                                <td width="10%"> <a href="http://localhost:3000/index.html"> HISTORY </a> </td>
+                                <td width="10%"> <a href="http://localhost:3000/index.html"> SETTINGS </a> </td>
+                                <td width="10%"> <a href="http://localhost:3000/index.html"> HELP </a> </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </header>
+
+            <div class="body-container">
+            {% for item in data %}
+
+                    {% if 'info_banner' in item %}
+                    <div class="info-bar">
+                        ROOT /
+                        <p class="marquee">
+                            <span>(If any) THIS IS INFORMATION BANNER ...</span>
+                        </p>
+                    </div>
+                    {% endif %}
+
+                    <!--
+                    <div class="control-bar">
+                        <table border="0" width="100%">
+                            <tbody>
+                            <tr>
+                                <td width="20%"> &nbsp; </td>
+                                <td width="40%"> &nbsp; </td>
+                                <td width="10%">TODAY</td>
+                                <td width="10%">WEEKLY </td>
+                                <td width="10%">MONTHLY </td>
+                                <td width="10%">YEARLY </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    -->
+
+                    <div> Here is the data:: {{ item['key'] }} </div>
+                    <div class="app-data-area">
+
+                            {% if 'key' in item %}
+
+                                {% for index in range(100) %}
+                                <div class="card">
+                                    <div class="card-title">
+                                        <p class="paragraph"> Project 675439838459359353543759374 {{ index }} </p>
+                                    </div>
+                                    <div class="card-info">
+                                        <p class="paragraph">
+                                            Build: {{index}}, Dated: {{index}} Aug 2021
+                                        </p>
+                                    </div>
+                                    <div class="card-body">
+                                        LBL: {{ item['test_result']['labels'] }}
+                                        VAL: {{ item['test_result']['values'] }}
+                                    </div>
+                                    <div class="card-action">
+                                        <button> VIEW REPORT </button>
+                                        <button> VIEW HISTORY </button>
+                                        <button> VISIT JENKINS </button>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            {% else %}
+                                <div> Oops, No data received ! </div>
+                            {% endif %}
+                    </div>
+
+            {% endfor %}
+            </div>
+
+            <div class="app-footer">
+                <hr class="footer-separator">
+                <p>
+                    "Automation Dashboard" Prototype-1 with sample data.
+                    <br/>
+                    Serving and written on Python Flask
+                    <br>
+                    Written with ♥ by Ashutosh Mishra
+                    <br/>
+                    Best viewed in 1200xANY resolution, not tuned for responsiveness.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="./Dashboard App_files/bundle.js"></script>
+    <script src="./Dashboard App_files/vendors_main.chunk.js"></script>
+    <script src="./Dashboard App_files/main.chunk.js"></script>
+  </body>
+  <grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+</html>

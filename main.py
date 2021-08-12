@@ -13,11 +13,8 @@ Usage:
 # ===============================================
 # Other stubs
 # ===============================================
-def problem1():
-    # problem statement
-    result = []
-    # Solution goes here
-    print(sorted(result))
+def combined_operations():
+    return True
 
 
 # ===============================================
@@ -27,6 +24,6 @@ if __name__ == "__main__":
     # Get the args
     config = {}
 
-    # Call the main now with configs
-    problem1()
+    # Call the combined operations now with configs
+    combined_operations()
 
