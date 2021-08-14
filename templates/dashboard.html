@@ -13,11 +13,17 @@
 	<link href="{{url_for('static', filename='assets/bootstrap/bootstrap4-alpha3.min.css')}}" rel="stylesheet">
 	<link href="{{url_for('static', filename='assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
 	<link href="{{url_for('static', filename='assets/web-analytics/style.css')}}" rel="stylesheet">
+	<!-- Custom stylesheet-->
+	<link href="{{url_for('static', filename='css/custom-style.css')}}" rel="stylesheet">
 
-	<!-- scripts -->
+	<!-- scripts: bootstrap and jquery -->
 	<script src="{{url_for('static', filename='assets/jquery/jquery-3.1.0.min.js')}}"></script>
 	<script src="{{url_for('static', filename='assets/tether/tether.min.js')}}"></script>
 	<script src="{{url_for('static', filename='assets/bootstrap/bootstrap4-alpha3.min.js')}}"></script>
+
+	<!-- scripts: Chart libs -->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 	<!--
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 	<script src="{{url_for('static', filename='assets/web-analytics/overview.js')}}"></script>
@@ -50,14 +56,14 @@
 	<div class="sidebar-toggle" id="sidebar">
 		<ul class="nav nav-sidebar">
 			<li>
-				<a href="/home" class="active">
+				<a href="/home">
 					<i class="fa fa-home fa-lg fa-fw" aria-hidden="true"></i>
 					<span>HOME</span>
 				</a>
 			</li>
 			<li role="separator" class="divider"></li>
             <li>
-				<a href="/dashboard">
+				<a href="/dashboard" class="active">
 					<i class="fa fa-dashboard fa-lg fa-fw" aria-hidden="true"></i>
 					<span>DASHBOARD</span>
 				</a>
@@ -115,36 +121,87 @@
 	<div class="page-content-toggle" id="page-content-wrapper">
 		<div class="container-fluid">
 
-			<!-- 1st row -->
+			<!-- 1st row is about the whole page -->
 			<div class="row m-b-1">
 				<div class="col-md-12">
 					<div class="card card-block">
-						<h4 class="card-title m-b-2"> WELCOME HOME </h4>
-						<div class="home-page-desc">
-							<p> This is the main page of the Automation Dashboard server. </p>
-							<p> This application is to present the reports more effectively and in detailed way of the executed automated suites. </p>
-							<p> It is just a POC proto-type, to show-case the idea of a dashboard server for better reporting of the automation reports and doing/extracting some insights from it. </p>
-						</div>
+						<h4 class="card-title m-b-2"> DASHBOARD </h4>
 					</div>
 				</div>
 			</div>
 			<!-- /1st row -->
 
-			<!-- 2nd row -->
+			<!-- This row is for the dashboard charts -->
 			<div class="row m-b-1">
-				<div class="col-md-12">
-					<div class="card card-block">
-						<p class="title m-b-2"> Available automation projects </p>
-						<div>
-							<ul>
-								{% for project in data %}
-								<li> {{ project.project_name }} </li>
-								{% endfor %}
-							</ul>
-						</div>
-					</div>
 
+				{% for project in data %}
+				<div class="col-md-4">
+					<div class="card custom-card card-block">
+						<h4 class="card-title m-b-2"> {{ project.project_name }} </h4>
+						<div class="{{ project.project_name|replace(' ' , '')|replace('-' , '') }}"></div>
+						<canvas height="300px" class="{{ project.project_name|replace(' ' , '')|replace('-' , '') }}" id="myChart_{{ project.project_name|replace(' ' , '')|replace('-' , '') }}"></canvas>
+						<div>
+							META CONTROLS :: {{ project.project_name|replace(' ' , '')|replace('-' , '') }}
+						</div>
+						<!-- Javascript action for chart -->
+						<script type="text/javascript">
+							  var ctx = document.getElementById("myChart_{{ project.project_name|replace(' ' , '')|replace('-' , '') }}").getContext('2d');
+
+							  // For doughnut chart | pie | polarArea
+							  var myChart = new Chart(ctx, {
+								  type: 'doughnut',
+								  data: {
+								  		labels: [
+								  			{% for keys, val in project.test_result.items() %}
+								  			"{{ keys|safe }}",
+								  			{% endfor %}
+								  		],
+								  		datasets: [{
+													data: [
+														{% for keys, val in project.test_result.items() %}
+														{{ val }},
+														{% endfor %}
+													],
+													borderColor:[
+													  "#3cba9f",
+													  "#ffa500",
+													  "#c45850",
+													],
+													backgroundColor: [
+													  "rgb(60,186,159,0.7)",
+													  "rgb(255,165,0,0.7)",
+													  "rgb(196,88,80,0.7)",
+													],
+													borderWidth: 0.5,
+										}]
+								  },
+								  options: {
+								  			responsive: true,
+											cutoutPercentage: 55,
+								  			title: {
+												display: true,
+												text: 'Test Results'
+											},
+											legend: {
+													position: 'bottom',
+											},
+											scales: {
+												  xAxes: [{
+													   display: false,
+												  }],
+												  yAxes: [{
+													   display: false,
+												  }],
+											},
+								  },
+
+								});
+
+						</script>
+					</div>
 				</div>
+				{% endfor %}
+
 			</div>
 			<!-- /2nd row -->
 

@@ -1,41 +1,64 @@
-from flask import Flask, jsonify, render_template, request, url_for
+from flask import Flask
+from flask import jsonify
+from flask import render_template
+from flask import url_for
 import os
 import json
 import argparse
 import jinja2
 import sample_data
+
+# ==============================================================
 # Flask configuration
+# ==============================================================
 public_folder_path = "/ReportDashboard/public/"
 public_folder_name = "public"
 app = Flask(__name__, static_url_path=public_folder_path, static_folder=public_folder_name)
 
 
-########################################
-# App Gateway
-########################################
+# ==============================================================
+# App Routes/Gateways
+# ==============================================================
 @app.route('/')
-def home():
-    # sample_data.data = [
-    #         {
-    #             "key": "Well, I came from flask server",
-    #             "project_name": "Project Alpha-1",
-    #             "build_no": "build15",
-    #             "build_url": "https://jenkins.url/prj/build15",
-    #             "report_date": "1 Aug 2021",
-    #             "crawled_date": "10 Aug 2021",
-    #             "report_location": "https://some.path/prj/build15/index.html",
-    #             "test_result": {
-    #                 "labels": ["Pass", "Fail", "Error", "Skipped", "Ignored"],
-    #                 "values": [10, 9, 8, 7, 6]
-    #             }
-    #         }
-    # ]
-    #
-    return render_template("index.html", data=sample_data.data)
-
-
-@app.route('/root')
+@app.route('/home')
 def root():
+    return render_template("index.html", data=sample_data.projects)
+
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template("dashboard.html", data=sample_data.letest_data)
+
+
+@app.route('/history')
+def history():
+    return render_template("history.html", data=sample_data.letest_data)
+
+
+@app.route('/analytics')
+def analytics():
+    return render_template("analytics.html", data=sample_data.letest_data)
+
+
+@app.route('/crawler-history')
+def crawler_history():
+    return "<h4> NOT AVAILABLE </h4>"
+
+# ==============================================================
+# Extra routes starts
+# ==============================================================
+@app.route('/sample1')
+def sample1():
+    return render_template("web-analytics-overview.html")
+
+
+@app.route('/sample2')
+def sample2():
+    return render_template("web-analytics-real-time.html")
+
+
+@app.route('/logo')
+def get_logo():
     """
     Queries the snapshot data for both Serenity and JMeter projects from the MongoDB.
     Renders the Snapshot view of html
@@ -89,8 +112,14 @@ def get_error():
     d = {1: True, 2: False}
     json.dumps(d)
     return json.stringify(d)
+# ==============================================================
+# Extra routes ends
+# ==============================================================
 
 
+# ==============================================================
+# Error Handlers Starts
+# ==============================================================
 # 404 Handler; We can also pass the specific request errors codes to the decorator;
 @app.errorhandler(404)
 # inbuilt function which takes error as parameter
@@ -105,8 +134,13 @@ def server_error(err):
     app.logger.exception(err)
     return f"<html><head><title>500</title><head><body><hr/> Oops, Following error occurred: <br/> {err} " \
            f"<hr/></body></html>", 500
+# ==============================================================
+# Error Handlers Ends
+# ==============================================================
 
 
+# ==============================================================
 # Executor
+# ==============================================================
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=10000, threaded=True)  # Running the app in debug mode
