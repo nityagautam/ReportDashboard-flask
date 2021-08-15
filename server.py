@@ -22,27 +22,42 @@ app = Flask(__name__, static_url_path=public_folder_path, static_folder=public_f
 @app.route('/')
 @app.route('/home')
 def root():
-    return render_template("index.html", data=sample_data.projects)
+    return render_template("index.html", data=sample_data.latest_data)
 
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template("dashboard.html", data=sample_data.letest_data)
+    return render_template("dashboard.html", data=sample_data.latest_data)
 
 
 @app.route('/history')
 def history():
-    return render_template("history.html", data=sample_data.letest_data)
+    return render_template("history.html", data=sample_data.history_data)
+
+#
+# @app.route('/analytics')
+# def analytics():
+#     return "<h4> Sorry ! NOT AVAILABLE YET </h4> " \
+#            "<hr/> " \
+#            "<p> Navigate to the <a href='/'> home </a> </p>"
+#
+#
+# @app.route('/crawler-history')
+# def crawler_history():
+#     return "<h4> Sorry ! NOT AVAILABLE YET </h4>" \
+#            "<hr/> " \
+#            "<p> Navigate to the <a href='/'> home </a> </p>"
 
 
-@app.route('/analytics')
-def analytics():
-    return render_template("analytics.html", data=sample_data.letest_data)
-
-
-@app.route('/crawler-history')
-def crawler_history():
-    return "<h4> NOT AVAILABLE </h4>"
+@app.route('/help')
+@app.route('/info')
+def info():
+    return render_template("notes.html")
+    # return "<h4> Write your notes here </h4> " \
+    #        "<textarea style='height: 40%; width: 100%' placeholder='Type here'> Type something here ... </textarea>" \
+    #        "<button> Store </button>" \
+    #        "<hr/> " \
+    #        "<p> Navigate to the <a href='/'> home </a> </p>"
 
 # ==============================================================
 # Extra routes starts
@@ -124,16 +139,15 @@ def get_error():
 @app.errorhandler(404)
 # inbuilt function which takes error as parameter
 def not_found(err):
-    return "<html><head><title>404</title><head><body><hr/> Oops, page you are looking is not available right now. " \
-           f"<hr/> Error: {err} </body></html>", 404
+    return render_template("error.html", error_data=err), 400
 
 
 # Exception/Error handler; We can also pass the specific errors to the decorator;
 @app.errorhandler(Exception)
 def server_error(err):
     app.logger.exception(err)
-    return f"<html><head><title>500</title><head><body><hr/> Oops, Following error occurred: <br/> {err} " \
-           f"<hr/></body></html>", 500
+    return render_template("error.html", error_data=err), 500
+
 # ==============================================================
 # Error Handlers Ends
 # ==============================================================

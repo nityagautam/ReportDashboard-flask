@@ -22,12 +22,7 @@
 	<script src="{{url_for('static', filename='assets/bootstrap/bootstrap4-alpha3.min.js')}}"></script>
 
 	<!-- scripts: Chart libs -->
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-	<!--
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-	<script src="{{url_for('static', filename='assets/web-analytics/overview.js')}}"></script>
-	-->
 
 </head>
 
@@ -83,19 +78,19 @@
 				</a>
 			</li>
 			<li role="separator" class="divider"></li>
-            <li>
+            <!-- Application settings and Info links-->
+			<li role="separator" class="divider"></li>
+			<li role="separator" class="divider"></li>
+			<li role="separator" class="divider"></li>
+			<li role="separator" class="divider"></li>
+
+			<li>
 				<a href="/crawler-history">
 					<i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
 					<span>CRAWL HISTORY</span>
 				</a>
 			</li>
 			<li role="separator" class="divider"></li>
-			<li role="separator" class="divider"></li>
-			<li role="separator" class="divider"></li>
-			<li role="separator" class="divider"></li>
-			<li role="separator" class="divider"></li>
-
-			<!-- Application settings and Info links-->
 			<li>
 				<a href="/settings">
 					<i class="fa fa-gear fa-lg fa-fw" aria-hidden="true"></i>
@@ -106,12 +101,12 @@
 			<li>
 				<a href="/help">
 					<i class="fa fa-newspaper-o fa-lg fa-fw" aria-hidden="true"></i>
-					<span>HELP</span>
+					<span>NOTES</span>
 				</a>
 			</li>
 			<li role="separator" class="divider"></li>
 			<li>
-				<span class="tag custom-tag" id="revenue-tag1">Shani's Experimental</span>
+				<span class="tag custom-tag" id="revenue-tag1">@amishra's Experimental</span>
 			</li>
 		</ul>
 	</div>
@@ -138,10 +133,19 @@
 				<div class="col-md-4">
 					<div class="card custom-card card-block">
 						<h4 class="card-title m-b-2"> {{ project.project_name }} </h4>
-						<div class="{{ project.project_name|replace(' ' , '')|replace('-' , '') }}"></div>
-						<canvas height="300px" class="{{ project.project_name|replace(' ' , '')|replace('-' , '') }}" id="myChart_{{ project.project_name|replace(' ' , '')|replace('-' , '') }}"></canvas>
+						<!-- Here goes our chart -->
+						<canvas height="250px" class="{{ project.project_name|replace(' ' , '')|replace('-' , '') }}" id="myChart_{{ project.project_name|replace(' ' , '')|replace('-' , '') }}"></canvas>
+						<!-- Here goes our META info (if any)
 						<div>
 							META CONTROLS :: {{ project.project_name|replace(' ' , '')|replace('-' , '') }}
+						</div>
+						-->
+
+						<!-- Here goes our card action buttons -->
+						<div class="action_btns_{{ project.project_name|replace(' ' , '')|replace('-' , '') }}" style="text-align: center;">
+							<button type="button" class="btn btn-dark btn-sm"> VIEW REPORT </button>
+							<button type="button" class="btn btn-dark btn-sm"> VIEW HISTORY </button>
+							<button type="button" class="btn btn-dark btn-sm"> VIEW JENKINS </button>
 						</div>
 						<!-- Javascript action for chart -->
 						<script type="text/javascript">
@@ -163,14 +167,14 @@
 														{% endfor %}
 													],
 													borderColor:[
-													  "#3cba9f",
-													  "#ffa500",
+													  "rgb(60,186,159,1.0)",
 													  "#c45850",
+													  "#ffa500",
 													],
 													backgroundColor: [
 													  "rgb(60,186,159,0.7)",
-													  "rgb(255,165,0,0.7)",
 													  "rgb(196,88,80,0.7)",
+													  "rgb(255,165,0,0.7)",
 													],
 													borderWidth: 0.5,
 										}]
@@ -180,10 +184,12 @@
 											cutoutPercentage: 55,
 								  			title: {
 												display: true,
-												text: 'Test Results'
+												text: 'LATEST TEST RESULT'
 											},
 											legend: {
-													position: 'bottom',
+											  display:true,
+											  position:'bottom',
+											  /* align:'start' */
 											},
 											scales: {
 												  xAxes: [{

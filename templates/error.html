@@ -50,7 +50,7 @@
 	<div class="sidebar-toggle" id="sidebar">
 		<ul class="nav nav-sidebar">
 			<li>
-				<a href="/home" class="active">
+				<a href="/home">
 					<i class="fa fa-home fa-lg fa-fw" aria-hidden="true"></i>
 					<span>HOME</span>
 				</a>
@@ -118,34 +118,16 @@
 			<div class="row m-b-1">
 				<div class="col-md-12">
 					<div class="card card-block">
-						<h4 class="card-title m-b-2"> WELCOME HOME </h4>
-						<div class="home-page-desc">
-							<p> This is the main page of the Automation Dashboard server. </p>
-							<p> This application is to present the reports more effectively and in detailed way of the executed automated suites. </p>
-							<p> It is just a POC proto-type, to show-case the idea of a dashboard server for better reporting of the automation reports and doing/extracting some insights from it. </p>
+						<h4 class="card-title m-b-2"> Oops !!! </h4>
+						<div class="error-desc">
+							<p> {{ error_data }} </p>
+							<hr/>
+							<p> Navigate to the <a href="/"> home </a> </p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- /1st row -->
-
-			<!-- 2nd row -->
-			<div class="row m-b-1">
-				<div class="col-md-12">
-					<div class="card card-block">
-						<p class="title m-b-2"> Available sample automation projects </p>
-						<div>
-							<ul>
-								{% for project in data %}
-								<li> {{ project.project_name }} </li>
-								{% endfor %}
-							</ul>
-						</div>
-					</div>
-
-				</div>
-			</div>
-			<!-- /2nd row -->
 
 		</div>
 		<!-- /.container-fluid -->
