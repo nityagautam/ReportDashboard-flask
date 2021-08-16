@@ -132,7 +132,8 @@
 				{% for project in data %}
 				<div class="col-md-4">
 					<div class="card custom-card card-block">
-						<h4 class="card-title m-b-2"> {{ project.project_name }} </h4>
+						<h4 class="card-title"> {{ project.project_name }} </h4>
+						<span> Report Date: {{ project.report_date }} </span>
 						<!-- Here goes our chart -->
 						<canvas height="250px" class="{{ project.project_name|replace(' ' , '')|replace('-' , '') }}" id="myChart_{{ project.project_name|replace(' ' , '')|replace('-' , '') }}"></canvas>
 						<!-- Here goes our META info (if any)

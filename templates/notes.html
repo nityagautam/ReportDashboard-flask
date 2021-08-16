@@ -118,10 +118,12 @@
 			<div class="row m-b-1">
 				<div class="col-md-12">
 					<div class="card card-block">
-						<h4 class="card-title m-b-2"> NOTES / INFO </h4>
+						<h4 class="card-title m-b-2"> NOTES / TODO </h4>
 						<div class="desc">
-							<textarea style='height: 200px; width: 100%' placeholder='Type here'> Type something here ... </textarea>
-							<button> Store </button>
+							<form method="POST" action="/get-todo">
+								<textarea name="todotxt" style='height: 200px; width: 100%' placeholder='Type something here ...'></textarea>
+								<input type="submit"> Store </input>
+							</form>
 							<hr/>
 							<p> Navigate to the <a href='/'> home </a> </p>
 						</div>

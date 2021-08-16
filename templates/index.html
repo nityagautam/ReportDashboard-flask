@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="{{url_for('static', filename='images/logo.svg')}}">
 
 	<title>Report Dashboard</title>
 
@@ -133,6 +134,25 @@
 			<div class="row m-b-1">
 				<div class="col-md-12">
 					<div class="card card-block">
+						<p class="title m-b-2"> Components / About  </p>
+						<div>
+							<ul>
+								{% for desc in app_desc_data %}
+								<li> {{ desc }} </li>
+								{% endfor %}
+							</ul>
+						</div>
+						<img height="600" src="{{url_for('static', filename='images/automation_dashboard.png')}}" alt="Dashboard architecture"> </img>
+					</div>
+
+				</div>
+			</div>
+			<!-- /2nd row -->
+
+			<!-- 3rd row -->
+			<div class="row m-b-1">
+				<div class="col-md-12">
+					<div class="card card-block">
 						<p class="title m-b-2"> Available sample automation projects </p>
 						<div>
 							<ul>
@@ -145,7 +165,7 @@
 
 				</div>
 			</div>
-			<!-- /2nd row -->
+			<!-- /3rd row -->
 
 		</div>
 		<!-- /.container-fluid -->

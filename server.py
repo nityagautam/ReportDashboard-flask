@@ -2,6 +2,8 @@ from flask import Flask
 from flask import jsonify
 from flask import render_template
 from flask import url_for
+from flask import request
+from flask import redirect
 import os
 import json
 import argparse
@@ -22,7 +24,7 @@ app = Flask(__name__, static_url_path=public_folder_path, static_folder=public_f
 @app.route('/')
 @app.route('/home')
 def root():
-    return render_template("index.html", data=sample_data.latest_data)
+    return render_template("index.html", app_desc_data=sample_data.app_desc_data, data=sample_data.latest_data)
 
 
 @app.route('/dashboard')
@@ -33,6 +35,14 @@ def dashboard():
 @app.route('/history')
 def history():
     return render_template("history.html", data=sample_data.history_data)
+
+
+@app.route('/get-todo', methods=['POST'])
+def get_todo():
+    print("KEY :: VALUE (from the received form data)")
+    print([(key, val) for key, val in zip(request.form.keys(), request.form.values())])
+    return redirect("/notes", code=302)
+
 
 #
 # @app.route('/analytics')
@@ -51,6 +61,7 @@ def history():
 
 @app.route('/help')
 @app.route('/info')
+@app.route('/notes')
 def info():
     return render_template("notes.html")
     # return "<h4> Write your notes here </h4> " \
@@ -140,6 +151,13 @@ def get_error():
 # inbuilt function which takes error as parameter
 def not_found(err):
     return render_template("error.html", error_data=err), 400
+
+
+# Exception/Error handler; We can also pass the specific errors to the decorator;
+@app.errorhandler(TypeError)
+def server_error(err):
+    app.logger.exception(err)
+    return render_template("error.html", error_data=err), 500
 
 
 # Exception/Error handler; We can also pass the specific errors to the decorator;
