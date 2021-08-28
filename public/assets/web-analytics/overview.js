@@ -1,7 +1,16 @@
 $(function () {
-	var totalRevenue = 2781450,
+
+    function sidebarToggleOnClick() {
+		$('#sidebar-toggle-button').on('click', function () {
+			$('#sidebar').toggleClass('sidebar-toggle');
+			$('#page-content-wrapper').toggleClass('page-content-toggle');
+			//renderAllCharts();
+		});
+	}
+
+	/*
+    var totalRevenue = 2781450,
 			totalVisitors = 883000;
-	
 
 	// data for drilldown charts
 	var dataMonthlyRevenueByCategory = {
@@ -453,45 +462,43 @@ $(function () {
 		visitorsChartBackButtonDOM.toggleClass("invisible");
 		visitorsChartTagDOM.toggleClass("invisible");
 	});
-	
+
 	// chart properties cutomized further based on screen width
 	function chartPropertiesCustomization () {
 		if ($(window).outerWidth() >= 1200 ) {
-			
+
 			annualRevenueByCategoryPieChart.options.legend.horizontalAlign = "left";
 			annualRevenueByCategoryPieChart.options.legend.verticalAlign = "center";
 			annualRevenueByCategoryPieChart.render();
-			
+
 			visitorsChartTagDOM.css("position", "absolute");
-			
+
 		} else if ($(window).outerWidth() < 1200) {
-			
+
 			annualRevenueByCategoryPieChart.options.legend.horizontalAlign = "center";
 			annualRevenueByCategoryPieChart.options.legend.verticalAlign = "top";
 			annualRevenueByCategoryPieChart.render();
-			
+
 			visitorsChartTagDOM.css("position", "static");
-			
+
 		}
 	}
-	
+
 	function renderAllCharts() {
 		for (var i = 0; i < allCharts.length; i++)
 			allCharts[i].render();
 	}
-	
-	function sidebarToggleOnClick() {
-		$('#sidebar-toggle-button').on('click', function () {
-			$('#sidebar').toggleClass('sidebar-toggle');
-			$('#page-content-wrapper').toggleClass('page-content-toggle');
-			renderAllCharts();
-		});	
-	}
-	
+
 	(function init() {
 		chartPropertiesCustomization();
 		$(window).resize(chartPropertiesCustomization);
 		sidebarToggleOnClick();
 	})();
-	
+	*/
+});
+
+$('#sidebar-toggle-button').on('click', function () {
+    $('#sidebar').toggleClass('sidebar-toggle');
+    $('#page-content-wrapper').toggleClass('page-content-toggle');
+    //renderAllCharts();
 });

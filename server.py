@@ -24,12 +24,12 @@ app = Flask(__name__, static_url_path=public_folder_path, static_folder=public_f
 @app.route('/')
 @app.route('/home')
 def root():
-    return render_template("index.html", app_desc_data=sample_data.app_desc_data, data=sample_data.latest_data)
+    return render_template("index.html", app_data=sample_data.app_data, data=sample_data.latest_data)
 
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template("dashboard.html", data=sample_data.latest_data)
+    return render_template("dashboard.html", app_data=sample_data.app_data, data=sample_data.latest_data)
 
 
 @app.route('/history')

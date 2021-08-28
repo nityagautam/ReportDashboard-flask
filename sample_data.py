@@ -1,17 +1,20 @@
 # Application config Data
 # In Progress for the app customization
 app_data = {
-    "app_name": "AUTOMATION DASHBOARD"
+    "app_name": "DASHBOARD",
+    "app_desc_data": [
+        "App has 3 main components:: Server + Data Manager(Aggregation and reports) + Crawler",
+        "Server is written on 'Python3' and has 'Flask' + 'Jinja Templates (for views)' ",
+        "Data Manager is being written on Python3 along with 'Sqlite3(For now)' which also manages the html reports on disk",
+        "Crawler(written on python3) which is the data extractor from the HTML reports and/or Jenkins for aggregation.",
+        "For crawler, we should/must add a trigger on CI/CD so that once any build get done, crawler should be triggered.",
+        ""
+    ]
 }
 
 # data = []
 app_desc_data = [
-    "App has 3 main components:: Server + Data Manager(Aggregation and reports) + Crawler",
-    "Server is written on 'Python3' and has 'Flask' + 'Jinja Templates (for views)' ",
-    "Data Manager is being written on Python3 along with 'Sqlite3(For now)' which also manages the html reports on disk",
-    "Crawler(written on python3) which is the data extractor from the HTML reports and/or Jenkins for aggregation.",
-    "For crawler, we should/must add a trigger on CI/CD so that once any build get done, crawler should be triggered.",
-    ""
+
 ]
 # Sample recent crawled data
 latest_data = [

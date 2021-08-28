@@ -99,11 +99,16 @@ body {
   display: none !important;
 }
 
+.sidebar-display {
+  display: block !important;
+}
+
+
 .page-content-toggle {
   margin-left: inherit !important;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 900px) {
   #sidebar {
     display: none;
   }
