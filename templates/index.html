@@ -21,7 +21,6 @@
 	<script src="{{url_for('static', filename='assets/bootstrap/bootstrap4-alpha3.min.js')}}"></script>
 	<!--
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-	<script src="{{url_for('static', filename='assets/web-analytics/overview.js')}}"></script>
 	-->
 
 </head>
@@ -36,7 +35,7 @@
 				</div>
 				<div class="brand">
 					<a href="/">
-						<span class="hidden-xs-down m-r-4">AUTOMATION DASHBOARD</span>
+						<span class="hidden-xs-down m-r-4"> {{ app_data['app_name'] }} </span>
 						<span class="tag" id="revenue-tag">POC PROTOTYPE-1</span>
 						<!-- <span class="lead"> HOME </span>-->
 					</a>
@@ -137,7 +136,7 @@
 						<p class="title m-b-2"> Components / About  </p>
 						<div>
 							<ul>
-								{% for desc in app_desc_data %}
+								{% for desc in app_data['app_desc_data'] %}
 								<li> {{ desc }} </li>
 								{% endfor %}
 							</ul>
@@ -174,5 +173,13 @@
 	<!-- /page-content-wrapper -->
 
 </body>
+
+<!-- script for menu handling -->
+<script>
+	$('#sidebar-toggle-button').on('click', function () {
+		$('#sidebar').toggleClass('sidebar-toggle');
+		$('#page-content-wrapper').toggleClass('page-content-toggle');
+	});
+</script>
 
 </html>
