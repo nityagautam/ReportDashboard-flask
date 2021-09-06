@@ -155,21 +155,21 @@ def get_error():
 @app.errorhandler(404)
 # inbuilt function which takes error as parameter
 def not_found(err):
-    return render_template("error.html", error_data=err), 400
+    return render_template("error.html", app_data=sample_data.app_data, error_data=err), 400
 
 
 # Exception/Error handler; We can also pass the specific errors to the decorator;
 @app.errorhandler(TypeError)
 def server_error(err):
     app.logger.exception(err)
-    return render_template("error.html", error_data=err), 500
+    return render_template("error.html", app_data=sample_data.app_data, error_data=err), 500
 
 
 # Exception/Error handler; We can also pass the specific errors to the decorator;
 @app.errorhandler(Exception)
 def server_error(err):
     app.logger.exception(err)
-    return render_template("error.html", error_data=err), 500
+    return render_template("error.html", app_data=sample_data.app_data, error_data=err), 500
 
 # ==============================================================
 # Error Handlers Ends
