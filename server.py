@@ -24,7 +24,7 @@ app = Flask(__name__, static_url_path=public_folder_path, static_folder=public_f
 @app.route('/')
 @app.route('/home')
 def root():
-    return render_template("index.html", app_data=sample_data.app_data, data=sample_data.latest_data)
+    return render_template("dashboard.html", app_data=sample_data.app_data, data=sample_data.latest_data)
 
 
 @app.route('/dashboard')
@@ -34,7 +34,12 @@ def dashboard():
 
 @app.route('/history')
 def history():
-    return render_template("history.html", data=sample_data.history_data)
+    return render_template("history.html", app_data=sample_data.app_data, data=sample_data.history_data)
+
+
+@app.route('/about')
+def about():
+    return render_template("about.html", app_data=sample_data.app_data, data=sample_data.latest_data)
 
 
 @app.route('/get-todo', methods=['POST'])
@@ -63,7 +68,7 @@ def get_todo():
 @app.route('/info')
 @app.route('/notes')
 def info():
-    return render_template("notes.html")
+    return render_template("notes.html", app_data=sample_data.app_data)
     # return "<h4> Write your notes here </h4> " \
     #        "<textarea style='height: 40%; width: 100%' placeholder='Type here'> Type something here ... </textarea>" \
     #        "<button> Store </button>" \
