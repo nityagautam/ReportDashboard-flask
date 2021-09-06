@@ -49,63 +49,28 @@
 	<!-- sidebar -->
 	<div class="sidebar-toggle" id="sidebar">
 		<ul class="nav nav-sidebar">
-			<!-- Side menus -->
-			<li role="separator" class="divider"></li>
-            <li>
-				<a href="/dashboard">
-					<i class="fa fa-dashboard fa-lg fa-fw" aria-hidden="true"></i>
-					<span>DASHBOARD</span>
-				</a>
-			</li>
-			<li role="separator" class="divider"></li>
-            <li>
-				<a href="/history">
-					<i class="fa fa-history fa-lg fa-fw" aria-hidden="true"></i>
-					<span>HISTORY</span>
-				</a>
-			</li>
-			<li role="separator" class="divider"></li>
-			<li>
-				<a href="/analytics">
-					<i class="fa fa-bar-chart fa-lg fa-fw" aria-hidden="true"></i>
-					<span>ANALYTICS</span>
-				</a>
-			</li>
-			<li role="separator" class="divider"></li>
-            <li role="separator" class="divider"></li>
-			<li role="separator" class="divider"></li>
-			<li role="separator" class="divider"></li>
-			<li role="separator" class="divider"></li>
-
-			<!-- Other menus:: Application settings and Info links-->
-			<li>
-				<a href="/crawler-history">
-					<i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i>
-					<span>CRAWL HISTORY</span>
-				</a>
-			</li>
-			<li role="separator" class="divider"></li>
-			<li>
-				<a href="/settings">
-					<i class="fa fa-gear fa-lg fa-fw" aria-hidden="true"></i>
-					<span>SETTINGS</span>
-				</a>
-			</li>
-			<li role="separator" class="divider"></li>
-			<li>
-				<a href="/help">
-					<i class="fa fa-newspaper-o fa-lg fa-fw" aria-hidden="true"></i>
-					<span>NOTES</span>
-				</a>
-			</li>
-			<li role="separator" class="divider"></li>
-			<li>
-				<a href="/home" class="active">
-					<i class="fa fa-home fa-lg fa-fw" aria-hidden="true"></i>
-					<span>ABOUT</span>
-				</a>
-			</li>
-			<li role="separator" class="divider"></li>
+			{% for menu in app_data["side_menu"] %}
+				{%if menu['name'] == "DASHBOARD" %}
+				<li>
+					<a href="{{menu['route']}}" class="active">
+						<i class="{{menu['icon']}}"></i>
+						<span> {{menu['name']}} </span>
+					</a>
+				</li>
+				<li role="separator" class="divider"></li>
+				{%elif menu['name'] != "-" %}
+				<li>
+					<a href="{{menu['route']}}">
+						<i class="{{menu['icon']}}"></i>
+						<span> {{menu['name']}} </span>
+					</a>
+				</li>
+				<li role="separator" class="divider"></li>
+				{%else%}
+				<li role="separator" class="divider"></li>
+				{%endif%}
+			{% endfor %}
+			<!-- And at the very end of the side menu attach the experimental tag -->
 			<li>
 				<span class="tag custom-tag" id="experimental-tag1"> {{app_data["app_experimental_tag"]}} </span>
 			</li>
