@@ -5,8 +5,8 @@ app_data = {
     "app_experimental_tag": "@amishra's Experimental",
 
     # Page-wise configuration data
-    "home_page": {
-        "title": "WELCOME HOME",
+    "about_page": {
+        "title": "ABOUT THIS APPLICATION",
         "desc": """This is the main page of the Automation Dashboard server. This application is to present the reports 
                 more effectively and in detailed way of the executed automated suites. 
                 It is just a POC(Proof of Concept) proto-type, to show-case the idea of a dashboard server 
