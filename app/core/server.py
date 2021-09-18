@@ -106,6 +106,7 @@ def get_used_data():
     return jsonify(sample_data.latest_data)
 
 
+
 @app.route('/sample-data')
 def get_sample_data():
     data = {
