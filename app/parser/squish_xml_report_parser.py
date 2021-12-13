@@ -1,5 +1,5 @@
 #===================================================================
-# @author:  amishra@perfoce.com
+# @author:  nityanarayan44@live.com
 # @written: 09 December 2021
 # @desc:    Squish XML report parser (gives out the dict/json data)
 #===================================================================

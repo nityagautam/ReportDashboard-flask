@@ -41,3 +41,6 @@ Just clone the repo/code and install the requirements;
 
 ###### Other things
 Simply goes here
+
+<hr/>
+Developer: nityanarayan44@live.com
