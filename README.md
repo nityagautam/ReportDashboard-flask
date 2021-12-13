@@ -1,4 +1,4 @@
-### Reporting Dashboard v1.0
+### Reporting Dashboard v2.0
 <hr/>
 
 
@@ -18,6 +18,10 @@ Just clone the repo/code and install the requirements;
 
 
 ###### Application Usage
+> Usage
+>
+> `python3 main.py`
+
 > Usage to start a crawling:
 > 
 > `python3 main.py --debug-mode --crawl=crawl_directory`
