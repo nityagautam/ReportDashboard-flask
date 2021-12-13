@@ -9,7 +9,7 @@ from __main__ import application
 from flask import jsonify, render_template, url_for, request, redirect
 # Local sample data import
 from app.config.uiconfig import app_ui_config
-import sample_data
+from app import sample_data
 
 
 # ==============================================================
